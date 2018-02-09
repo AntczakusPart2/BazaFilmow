@@ -97,8 +97,9 @@ public class EdycjaFilmuController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         
         //Tytul.setText(b.getTytul());
-        Film value = (Film) controller.lista.getSelectionModel().getSelectedItem();        
-        Tytul.setText(value.getTytul());
+        //Film value = (Film) controller.lista.getSelectionModel().getSelectedItem();        
+        //Tytul.setText(value.getTytul());
+        Tytul.setText(b.getTytul());
         
     }
 
@@ -113,7 +114,7 @@ public class EdycjaFilmuController implements Initializable {
     public static void DajFilm(Film a){
         b=a;
         System.out.println(b.getTytul());
-        //Tytul.setText(b.getTytul());
+        
     }
     
     

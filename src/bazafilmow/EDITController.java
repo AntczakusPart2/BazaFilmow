@@ -104,16 +104,16 @@ public class EDITController implements Initializable {
         
         if(value != null){
             
-            //Film a = value;
-            //EdycjaFilmuController.DajFilm(a);
+            
+            EdycjaFilmuController.DajFilm(value);
             
 
 
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EdycjaFilmu.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
              
-           EdycjaFilmuController display = fxmlLoader.getController();           
-           display.setText(tytul,Rok);
+           //EdycjaFilmuController display = fxmlLoader.getController();           
+           //display.setText(tytul,Rok);
 
             Stage stage = new Stage();
             stage.setTitle("Edycja");
