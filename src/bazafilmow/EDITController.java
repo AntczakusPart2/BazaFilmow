@@ -5,11 +5,14 @@
  */
 package bazafilmow;
 
+import bazafilmow.model.Aktor;
 import bazafilmow.model.Film;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Collection;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -50,6 +53,9 @@ public class EDITController implements Initializable {
     @FXML 
     private Button Usun;
     
+   // @FXML
+    //EdycjaFilmuController display;
+          
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
@@ -62,6 +68,9 @@ public class EDITController implements Initializable {
         list.addAll(filmy);
         lista.setItems(list);
         
+        Edytuj.setDisable(true);
+        
+        
            
     }    
     
@@ -73,7 +82,10 @@ public class EDITController implements Initializable {
         Film o = new Film();
         o = (Film) lista.getSelectionModel().getSelectedItem();        
         System.out.println(o.getTytul());
-
+        
+        if(lista.getSelectionModel().getSelectedItem()!=null){
+            Edytuj.setDisable(false);
+        }
     
 }
     
@@ -82,15 +94,37 @@ public class EDITController implements Initializable {
         
         Film value = (Film) lista.getSelectionModel().getSelectedItem();
         
+        
+        
+        String tytul = value.getTytul();
+        short RokProd = value.getRokProd();
+        String Rok = String.valueOf(RokProd);
+             
+        
+        
         if(value != null){
+            
+            //Film a = value;
+            //EdycjaFilmuController.DajFilm(a);
+            
+
+
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EdycjaFilmu.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
+             
+           EdycjaFilmuController display = fxmlLoader.getController();           
+           display.setText(tytul,Rok);
+
             Stage stage = new Stage();
             stage.setTitle("Edycja");
             stage.setScene(new Scene(root1));  
-            stage.show();
+            stage.show();            
+            
+            System.out.println(value.getTytul());
+  
         }
-        }
+
+    }
     
     @FXML
     private void handleUsunButton(ActionEvent event)throws IOException{

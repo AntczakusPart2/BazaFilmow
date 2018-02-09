@@ -197,13 +197,10 @@ public class NEWController implements Initializable {
             @FXML
             private void comboActionKraj(){
                 
-                ObservableList<String> lista = FXCollections.observableArrayList();
-                EntityManager em = Utils.getEntityManager();
-                
-                Query queryKraj = em.createNamedQuery("Kraj.findAll");
-                Collection kraje = queryKraj.getResultList();     
-                lista.addAll(kraje);
-                WyborKraju.setItems(lista);
+                Kraj lol = new Kraj();
+                lol = (Kraj) WyborKraju.getSelectionModel().getSelectedItem();
+                String nazwa = lol.getNazwa();
+                NazwaKraju.setText(nazwa);
                 
             }
             
@@ -253,14 +250,8 @@ public class NEWController implements Initializable {
                 boolean flag =false;
                 
 
-
-                short RokValue = Short.parseShort(Rok.getText());
-                f.setRokProd(RokValue);
-                 
-                float BoxOffice = Float.parseFloat(Money.getText());
-                f.setBoxOffice(BoxOffice);
                 
-                 Set<Gatunek> gg=dodanieGatunkowDoFilmu();
+                 Set<Gatunek> gg=dodanieGatunkowDoFilmu(f);
                  if(gg.isEmpty()==false){
                  f.setGatunki(gg);
                  
@@ -274,7 +265,7 @@ public class NEWController implements Initializable {
                 
                 System.out.println(f.getGatunki());
                 
-
+                
                // f.addKraj((Kraj) WyborKraju.getSelectionModel().getSelectedItem());
                // em.persist(f);
                 
@@ -309,7 +300,7 @@ public class NEWController implements Initializable {
                 }
                 else{
                     
-                     RokValue = Short.parseShort(Rok.getText()); //-short
+                     short RokValue = Short.parseShort(Rok.getText()); //-short
                     f.setRokProd(RokValue);
                     em.persist(f); 
                     flag = true;
@@ -328,7 +319,7 @@ public class NEWController implements Initializable {
                 }
                 else{
                     
-                    BoxOffice = Float.parseFloat(Money.getText()); //-float
+                    float BoxOffice = Float.parseFloat(Money.getText()); //-float
                     f.setBoxOffice(BoxOffice);
                     em.persist(f);
                     flag = true;
@@ -362,9 +353,7 @@ public class NEWController implements Initializable {
                 em.getTransaction().commit();
 
 		em.close();
-                
-                
-               
+
                 
                 Parent movie_parent = FXMLLoader.load(getClass().getResource("RootLayout.fxml"));
 	        Scene movie_scene = new Scene(movie_parent);
@@ -416,7 +405,7 @@ public class NEWController implements Initializable {
             
             //zakładam że sam film został juz utworzony i jest w bazie
             
-            private Set<Gatunek> dodanieGatunkowDoFilmu(){
+            private Set<Gatunek> dodanieGatunkowDoFilmu(Film f){
                 
                 Gatunek g = new Gatunek();
                 
@@ -469,25 +458,25 @@ public class NEWController implements Initializable {
                   SetG.add(g);
                 }
             
-                if(Sci.isSelected()){
+                if(Sci.isSelected()== true){
                 g=Utilities3.dajGatunek("Sci-Fi");
-                film1.addGatunek(g);
+                 SetG.add(g);
                 }
                      
                 if(Dokument.isSelected()){
                 g=Utilities3.dajGatunek("Dokumentalny");
-                film1.addGatunek(g);
+                 SetG.add(g);
                 }
                 
                 if(Przygodowy.isSelected()){
                 g=Utilities3.dajGatunek("Przygodowy");
-                film1.addGatunek(g);
+                 SetG.add(g);
                 }
               return SetG;  
             }
+
             
-                em.getTransaction().commit();
-                em.close();  
-            }
+                
+        }
             
-}
+

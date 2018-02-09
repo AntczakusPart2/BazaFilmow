@@ -5,6 +5,7 @@
  */
 package bazafilmow;
 
+import bazafilmow.model.Aktor;
 import bazafilmow.model.Film;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -26,13 +27,13 @@ public class EdycjaFilmuController implements Initializable {
 
     
     @FXML
-    private TextField Tytul;
+    public TextField Tytul;
     
     @FXML
-    private TextField Rok;
+    public TextField Rok;
     
     @FXML
-    private TextField Money;
+    public TextField Money;
     
     @FXML
     private ComboBox WyborKraju;
@@ -83,31 +84,38 @@ public class EdycjaFilmuController implements Initializable {
     @FXML
     private Button RemoveRe;
     
+    static Film b;
+    
     
     /**
      * Initializes the controller class.
      */
-    
-    private EDITController controller;
+    @FXML
+     EDITController controller;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        //Tytul.setText(b.getTytul());
+        Film value = (Film) controller.lista.getSelectionModel().getSelectedItem();        
+        Tytul.setText(value.getTytul());
+        
+    }
 
-    EntityManager em = Utils.getEntityManager();
 
-    em.getTransaction().begin(); 
+    public void setText(String Tytul,String Rok){
+        
+        this.Tytul.setText(Tytul);
+        this.Rok.setText(Rok);
+        
+    }
     
-    Film value = (Film) controller.lista.getSelectionModel().getSelectedItem();
+    public static void DajFilm(Film a){
+        b=a;
+        System.out.println(b.getTytul());
+        //Tytul.setText(b.getTytul());
+    }
     
-    Tytul.setText(value.getTytul());
     
-    short RokProd = value.getRokProd();
- 
-    Rok.setText(String.valueOf(RokProd));
-    
-    em.getTransaction().commit();
-    em.close();
-    
-    }    
     
 }

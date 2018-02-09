@@ -89,20 +89,6 @@ public class MainController implements Initializable {
 	    }    
 
 
-    @FXML
-    private void GoSzukaj(ActionEvent event) throws IOException {
-           
-        
-            System.out.println("You clicked me!");
-	        Parent movie_parent = FXMLLoader.load(getClass().getResource("SearchingTest1.fxml"));
-	        Scene movie_scene = new Scene(movie_parent);
-	        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-	          
-	                app_stage.hide(); //optional
-	                app_stage.setScene(movie_scene);
-	                app_stage.show();
-    }
-
             
             @FXML
             private void handleEditButtonAction(ActionEvent event) throws IOException {
