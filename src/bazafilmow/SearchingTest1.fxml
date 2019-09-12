@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bazafilmow.SearchingTest1Controller">
+   <children>
+      <TextArea fx:id="TextA1" layoutX="25.0" layoutY="22.0" onKeyReleased="#WyszukajSzybko" prefHeight="57.0" prefWidth="754.0" />
+      <ListView fx:id="ListView1" layoutX="25.0" layoutY="102.0" prefHeight="523.0" prefWidth="754.0" />
+   </children>
+</AnchorPane>

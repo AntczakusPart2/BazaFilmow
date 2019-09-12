@@ -34,6 +34,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Aktor.findByImie", query = "SELECT a FROM Aktor a WHERE a.imie = :imie")
     , @NamedQuery(name = "Aktor.findByNazwisko", query = "SELECT a FROM Aktor a WHERE a.nazwisko = :nazwisko")
     , @NamedQuery(name = "Aktor.findByNarodowosc", query = "SELECT a FROM Aktor a WHERE a.narodowosc = :narodowosc")
+    , @NamedQuery(name = "Aktor.findAllAlpha", query = "SELECT a FROM Aktor a order by a.nazwisko")
     , @NamedQuery(name = "Aktor.findByDataUrodzenia", query = "SELECT a FROM Aktor a WHERE a.dataUrodzenia = :dataUrodzenia")})
 public class Aktor implements Serializable {
 
@@ -122,14 +123,14 @@ public class Aktor implements Serializable {
     public void addFilm(Film f)
     {
         this.filmy.add(f);
-        f.addAktor(this);
+        f.getAktorzy().add(this);
     }
     public void deleteFilm(Film f)
     {
-        this.filmy.remove(f);
-        f.deleteAktor(this);
+        f.getAktorzy().remove(this);
+        this.getFilmy().remove(f);
     }
-
+    //TODO: implementacja preremove 
     @Override
     public int hashCode() {
         int hash = 5;

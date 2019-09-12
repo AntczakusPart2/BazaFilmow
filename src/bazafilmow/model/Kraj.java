@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Kraj.findAll", query = "SELECT k FROM Kraj k")
     , @NamedQuery(name = "Kraj.findByKrajId", query = "SELECT k FROM Kraj k WHERE k.krajId = :krajId")
+        , @NamedQuery(name = "Kraj.findAllAlpha", query = "SELECT k FROM Kraj k order by k.nazwa")
     , @NamedQuery(name = "Kraj.findByNazwa", query = "SELECT k FROM Kraj k WHERE k.nazwa = :nazwa")})
 public class Kraj implements Serializable,Comparable<Kraj> {
 
@@ -113,14 +114,12 @@ public class Kraj implements Serializable,Comparable<Kraj> {
     public void addFilm(Film f)
     {
         this.filmy.add(f);
-        Set<Kraj> kraje = new HashSet<>(f.getKraje());
-        kraje.add(this);
-        f.setKraje(kraje);
+        f.getKraje().add(this);
     }
     public void deleteFilm(Film f)
     {
         this.filmy.remove(f);
-        f.deleteKraj(this);
+        f.getKraje().remove(this);
     }
     
     @Override
